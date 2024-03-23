@@ -1,7 +1,7 @@
 import React from "react";
 import CreateForm from "./create-form";
 import { deleteTodoById, readTodo, updateTodoById } from "./actions";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/button";
 import { cn } from "@/lib/utils";
 
 export default async function page() {
