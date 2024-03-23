@@ -1,0 +1,35 @@
+import { Button } from "@/components/ui/button";
+import { readUserSession } from "@/lib/actions";
+import {createSupabaseServerClient} from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import React from "react";
+import {getUser} from "@/api/user";
+
+export default async function page() {
+	const { data } = await readUserSession();
+
+	if (!data.session) {
+		return redirect("/auth-server");
+	}
+
+	const logout = async () => {
+		"use server";
+		const supabse = await createSupabaseServerClient();
+		await supabse.auth.signOut();
+		redirect("/auth-server");
+	};
+
+	const {data:user,} = await getUser();
+
+	return (
+		<div>
+			<form action={logout}>
+				<Button>SignOut</Button>
+				test
+			</form>
+			<pre>
+				{JSON.stringify(user)}
+			</pre>
+		</div>
+	);
+}
