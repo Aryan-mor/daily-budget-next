@@ -22,6 +22,7 @@ export default function RootLayout({
         <html lang="en" className='dark min-h-[100vh]'>
         <body className={cn('min-h-[inherit]', inter.className)}>
         <Providers>
+            NEXT_PUBLIC_HOST: {process.env.NEXT_PUBLIC_HOST}<br/><br/>
             {children}
         </Providers>
         </body>
