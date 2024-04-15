@@ -3,7 +3,7 @@ import {NextResponse} from "next/server";
 import {cookies} from "next/headers";
 
 export async function GET(request: Request) {
-    const requestUrl = new URL(process.env.NEXT_PUBLIC_HOST ?? request.url);
+    const requestUrl = new URL(request.url);
     console.log('sakjgkjakgaga', process.env.NEXT_PUBLIC_HOST)
     const isAuth = cookies().get("supabase-auth-token");
 
