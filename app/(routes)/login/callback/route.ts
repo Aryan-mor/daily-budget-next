@@ -3,7 +3,7 @@ import {NextResponse} from "next/server";
 import {cookies} from "next/headers";
 
 export async function GET(request: Request) {
-    const requestUrl = new URL((process.env.NEXT_PUBLIC_HOST ?? request.url) + 'test');
+    const requestUrl = new URL(process.env.NEXT_PUBLIC_HOST ?? request.url);
     console.log('sakjgkjakgaga', process.env.NEXT_PUBLIC_HOST)
     const isAuth = cookies().get("supabase-auth-token");
 
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
         return NextResponse.redirect(requestUrl.origin);
     }
 
-    const {searchParams} = new URL(process.env.NEXT_PUBLIC_HOST ?? request.url);
+    const {searchParams} = new URL(request.url);
     const code = searchParams.get("code");
 
     if (code) {
