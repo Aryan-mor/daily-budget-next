@@ -10,7 +10,9 @@ import {isEmpty} from "@nextui-org/shared-utils";
 
 export default async function page() {
     const {data} = await readUserSession();
-
+    return <div>
+        test
+    </div>
     if (!data.session) {
         return redirect("/login");
     }
@@ -34,7 +36,6 @@ export default async function page() {
         <div>
             <form action={logout}>
                 <Button color="primary" type="submit">SignOut</Button>
-                test
             </form>
             <pre>
             	{JSON.stringify(user)}

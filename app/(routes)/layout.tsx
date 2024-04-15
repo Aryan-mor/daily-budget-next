@@ -3,6 +3,10 @@ import {Inter} from "next/font/google";
 import "../_assets/globals.css";
 import Providers from "@/app/_providers/providers";
 import {cn} from "@/app/_lib/utils";
+import {Button} from "@nextui-org/button";
+import React from "react";
+import {createSupabaseServerClient} from "@/app/_lib/supabase/server";
+import {redirect} from "next/navigation";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -16,13 +20,22 @@ export default function RootLayout({
                                    }: {
     children: React.ReactNode;
 }) {
-
+    
+    const logout = async () => {
+        "use server";
+        const supabase = await createSupabaseServerClient();
+        await supabase.auth.signOut();
+        redirect("/login");
+    };
 
     return (
         <html lang="en" className='dark min-h-[100vh]'>
         <body className={cn('min-h-[inherit]', inter.className)}>
         <Providers>
             NEXT_PUBLIC_HOST: {process.env.NEXT_PUBLIC_HOST}<br/><br/>
+            <form action={logout}>
+                <Button color="primary" type="submit">SignOut</Button>
+            </form>
             {children}
         </Providers>
         </body>
