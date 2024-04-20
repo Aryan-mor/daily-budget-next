@@ -4,8 +4,10 @@ import {createSupabaseServerClient} from "@/app/_lib/supabase/server";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 import {getUser} from "@/app/_api/user";
+import {unstable_noStore as noStore} from "next/dist/server/web/spec-extension/unstable-no-store";
 
 export async function getWallets() {
+    noStore();
     const supabase = await createSupabaseServerClient();
     const {data, error} = await supabase.from('wallet').select("*");
     return {

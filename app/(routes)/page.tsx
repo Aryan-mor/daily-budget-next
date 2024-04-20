@@ -10,9 +10,7 @@ import {isEmpty} from "@nextui-org/shared-utils";
 
 export default async function page() {
     const {data} = await readUserSession();
-    return <div>
-        test
-    </div>
+
     if (!data.session) {
         return redirect("/login");
     }
@@ -44,7 +42,7 @@ export default async function page() {
             <br/>
             <br/>
             <pre>
-            	{JSON.stringify(wallets)}
+            	wallets: {JSON.stringify(wallets)}
             </pre>
             <br/>
             <br/>
